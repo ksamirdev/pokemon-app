@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pokemon Finder App</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/static/css/index.css" />
+    <!-- CSS END -->
+
+    <!-- FONTS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Madimi+One&display=swap"
+      rel="stylesheet"
+    />
+    <!-- FONTS END -->
+  </head>
+  <body class="min-h-screen min-w-screen">
+    <div class="container flex flex-col aligm-center justify-center">
+      <img src="/static/assets/pokemon-logo.png" draggable="false" />
+
+      <form class="pokemon-search-container" action="/search" method="get">
+        <input
+          type="text"
+          name="query"
+          id="search"
+          class="pokemon-input"
+          placeholder="Enter pokemon name or id"
+          required
+          aria-required="true"
+          minlength="1"
+        />
+
+        <button
+          type="submit"
+          class="pokemon-submit"
+          title="Search the pokemon!"
+        >
+          <img
+            class="pokeball"
+            src="/static/assets/pokeball.png"
+            alt=""
+            height="40"
+            width="40"
+            draggable="false"
+          />
+        </button>
+      </form>
+
+      <!-- FOR ERROR -->
+      {% if success == False %}
+      <div class="response-error-container">
+        <!-- https://lucide.dev/icons/info -->
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="lucide lucide-info"
+        >
+          <circle cx="12" cy="12" r="10" />
+          <path d="M12 16v-4" />
+          <path d="M12 8h.01" />
+        </svg>
+
+        <span>{{message}}</span>
+      </div>
+      {% endif %}
+
+      <!-- ACTUAL POKEMON -->
+      {% if success == True %}
+      <div class="pokemon-container flex flex-col">
+        <div class="pokemon-wrapper">
+          <div>
+            <img
+              src="{{ data.image }}"
+              class="pokemon-image"
+              draggable="false"
+              alt=""
+            />
+          </div>
+
+          <div class="pokemon-details">
+            <div class="flex flex-row justify-center" style="gap: 5px">
+              <span class="pokemon-type-badge">{{ data.primary_type }}</span>
+
+              {% if data.secondary_type != None %}
+              <span class="pokemon-type-badge">{{ data.secondary_type }}</span>
+              {% endif %}
+            </div>
+            <span class="pokemon-name madimi-one">#{{ data.id }} {{ data.name }}</span>
+          </div>
+        </div>
+
+        <div class="pokemon-description">
+          <span>{{ data.description }}</span>
+        </div>
+
+        <div>
+          <div class="pokemon-meta-container">
+            <span>Attack: <b>{{ data.attack }}</b></span>
+            <span class="pokemon-meta-divider">|</span>
+            <span>Defense: <b>{{ data.defence }}</b></span>
+          </div>
+
+          <div class="pokemon-meta-container">
+            <span>HP: <b>{{ data.hp }}</b></span>
+            <span class="pokemon-meta-divider">|</span>
+            <span>Speed: <b>{{ data.speed }}</b></span>
+          </div>
+
+          <div class="pokemon-meta-container">
+            <span>Height: <b>{{ data.height }}</b></span>
+            <span class="pokemon-meta-divider">|</span>
+            <span>Weight: <b>{{ data.weight }}</b></span>
+          </div>
+
+          <div class="pokemon-meta-container">
+            <span>Spe. Attack: <b>{{ data.special_attack }}</b></span>
+            <span class="pokemon-meta-divider">|</span>
+            <span>Spe. Defense: <b>{{ data.special_defence }}</b></span>
+          </div>
+        </div>
+      </div>
+      {% endif %}
+    </div>
+  </body>
+</html>
