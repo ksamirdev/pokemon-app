@@ -29,3 +29,14 @@ def search_pokemon():
   data['name'] = data['name'].title()
 
   return render_template("index.html", success=True, data=data)
+
+
+
+tasks = ["task1", "task2", "task3", "task4"]
+# TODO APP
+@app.route('/todo')
+def todo_app():
+  return render_template("todo.html", tasks=tasks)
+
+if __name__ == "__main__":
+  app.run()
