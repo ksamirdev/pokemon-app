@@ -1,0 +1,177 @@
+/* https://www.joshwcomeau.com/css/custom-css-reset/ */
+/*
+  1. Use a more-intuitive box-sizing model.
+*/
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+/*
+  2. Remove default margin
+*/
+* {
+  margin: 0;
+}
+/*
+  Typographic tweaks!
+  3. Add accessible line-height
+  4. Improve text rendering
+*/
+body {
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+/*
+  5. Improve media defaults
+*/
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+/*
+  6. Remove built-in form typography styles
+*/
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+/*
+  7. Avoid text overflows
+*/
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  overflow-wrap: break-word;
+}
+/*
+  8. Create a root stacking context
+*/
+#root,
+#__next {
+  isolation: isolate;
+}
+
+
+
+html,
+body {
+  min-height: 100vh;
+  min-width: 100vw;
+
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
+
+
+.madimi-one {
+  font-family: "Madimi One", sans-serif;
+}
+
+.container {
+  padding-block: 7rem;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.wrapper {
+  background-color: #fef2f2;
+  padding: 1rem;
+  border-radius: 1rem;
+
+  min-width: 60vw;
+  min-height: 50vh;
+
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  border: 2px solid #ef4444;
+}
+
+.app-title {
+  font-size: 3rem;
+  text-align: center;
+  color: #ef4444;
+
+  text-decoration-line: underline;
+  text-decoration-style: wavy;
+  text-decoration-thickness: 5px;
+  text-underline-offset: 10px;
+}
+
+.add-task-container {
+  border: 2px solid #ef4444;
+  border-radius: 999px;
+  align-self: center;
+  padding: .3rem .5rem;
+}
+
+.add-task-input {
+  color: #b91c1c;
+  border:  none;
+  outline: none;
+  background-color: transparent;
+}
+
+.add-task-submit {
+  background-color: #dc2626;
+  border: none;
+  color: white;
+  border-radius: 999px;
+  cursor: pointer;
+  padding: .2rem 1rem;
+  transition: .2s linear;
+}
+
+.add-task-submit:hover {
+  opacity: .9;
+}
+
+
+
+.hidden {
+  display: none !important;
+
+}
+.response-error-container {
+
+  border: 2px solid red;
+  color: red;
+  border-radius: 5px;
+  padding: 5px 10px;
+  background-color: #fee2e2;
+
+  display: inline-flex;
+  gap: 5px;
+}
+
+.task-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding-bottom: 10px;
+}
+.task-delete-button {
+  background-color: #ef4444;
+  border: none;
+  color: white;
+  border-radius: 10px;
+  cursor: pointer;
+}
+.task-delete-button:hover {
+  opacity: .9;
+}

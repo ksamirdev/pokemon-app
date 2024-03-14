@@ -1,13 +1,92 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-</head>
-<body>
-  {% for task in tasks %}
-    <span>{{ task }}</span>
-  {% endfor %}
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Todo App</title>
+
+    <link rel="stylesheet" href="/static/css/todo.css" />
+
+    <!-- FONTS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Madimi+One&display=swap"
+      rel="stylesheet"
+    />
+    <!-- FONTS END -->
+  </head>
+  <body>
+    <div class="container">
+      <div class="wrapper">
+        <h1 class="madimi-one app-title">Todo App</h1>
+
+        <form action="/todo/add" method="POST" class="add-task-container">
+          <input
+            type="text"
+            class="add-task-input"
+            name="todo"
+            placeholder="Enter todo"
+          />
+          <button type="submit" class="add-task-submit">Add Task</button>
+        </form>
+
+        <div class="response-error-container hidden">
+          <!-- https://lucide.dev/icons/info -->
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="lucide lucide-info"
+          >
+            <circle cx="12" cy="12" r="10" />
+            <path d="M12 16v-4" />
+            <path d="M12 8h.01" />
+          </svg>
+
+          <span class="response-error-message"></span>
+        </div>
+
+        <ul>
+          {% for task in tasks %}
+            <div class="task-container"> 
+              <li>{{ task }}</li>
+
+              <form action="/todo/delete" method="POST">
+                <!-- https://stackoverflow.com/questions/17739264/count-number-of-rows-in-flask-templates -->
+                <input type="hidden" name="todo-index" value="{{ loop.index0 }}">
+                <button class="task-delete-button">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash-2"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/><line x1="10" x2="10" y1="11" y2="17"/><line x1="14" x2="14" y1="11" y2="17"/></svg>
+                </button>
+              </form>
+            </div>
+
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+
+    <script>
+      const searchParams = new URLSearchParams(window.location.search);
+      const error = searchParams.get("error");
+      if (error && error.length > 0) {
+        const errorElement = document.getElementsByClassName(
+          "response-error-container"
+        );
+        const errorMessageElement = document.getElementsByClassName(
+          "response-error-message"
+        );
+        if (errorElement && errorMessageElement) {
+          errorElement.classList.remove("hidden");
+          errorMessageElement.innerText = error;
+        }
+      }
+    </script>
+  </body>
 </html>

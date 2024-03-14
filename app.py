@@ -1,9 +1,11 @@
 import requests
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect, session
+
 
 app = Flask(__name__,
             static_folder='web/static',
             template_folder='web/templates')
+
 
 
 # OUR POKEMON PAGE!
@@ -31,12 +33,34 @@ def search_pokemon():
   return render_template("index.html", success=True, data=data)
 
 
+app.config['SECRET_KEY'] = 'secret_key'
 
-tasks = ["task1", "task2", "task3", "task4"]
 # TODO APP
 @app.route('/todo')
 def todo_app():
-  return render_template("todo.html", tasks=tasks)
+  if "tasks" not in session:
+    session['tasks'] = []
 
-if __name__ == "__main__":
-  app.run()
+  return render_template("todo.html", tasks=session['tasks'])
+
+@app.route('/todo/add', methods=["POST"])
+def add_todo():
+  todo = request.form.get('todo')
+  if todo == None or len(todo.strip()) <= 0:
+    return redirect('/todo?error=Please provide a task', code=302)
+
+  session["tasks"] += [todo.strip()]
+  return redirect("/todo", code=302)
+
+
+@app.route("/todo/delete", methods=["POST"])
+def remove_todo():
+  index = request.form.get('todo-index')
+  if index == None:
+    return redirect('/todo?error=Please provide a index to delete a task', code=302)
+  
+  # https://stackoverflow.com/questions/627435/how-to-remove-an-element-from-a-list-by-index
+  del session['tasks'][int(index)]
+
+  session['tasks'] = session['tasks'];
+  return redirect("/todo", code=302)
