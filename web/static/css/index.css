@@ -113,7 +113,7 @@ body {
   gap: 1rem;
   border: 2px solid rgb(56, 90, 166);
   border-radius: 10px;
-  min-width: 500px;
+  min-width: 800px;
   padding: 0 0 0 0.5rem;
 }
 
@@ -153,7 +153,7 @@ body {
 }
 
 .pokemon-container {
-  min-width: 500px;
+  min-width: 800px;
   border: 2px solid rgb(56, 90, 166);
   padding: 0.5rem;
   border-radius: 1rem;
@@ -170,9 +170,8 @@ body {
 
 .pokemon-wrapper {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
   align-items: center;
-
   place-items: center;
 }
 
@@ -184,13 +183,13 @@ body {
 .pokemon-container .pokemon-details {
   display: flex;
   flex-direction: column;
+  grid-column: 2/-1;
 }
 
 .pokemon-type-badge {
   border: 2px solid #60a5fa;
   border-radius: 9999px;
   padding: 0.1rem 1rem;
-  width: min-content;
   align-self: center;
   font-size: small;
   background-color: #dbeafe;

@@ -14,7 +14,7 @@ def pokemon_page():
   return render_template("index.html")
 
 
-POKEMON_API = "https://api.pokemon.project.projectrexa.dedyn.io/pokeapi/{query}?authorization=622BEB8354BCDC1C94E1B5B414C66"
+POKEMON_API = "https://pokeapi.co/api/v2/pokemon/{query}"
 
 @app.route("/search", methods=["GET", "POST"])
 def search_pokemon(): 
@@ -64,3 +64,7 @@ def remove_todo():
 
   session['tasks'] = session['tasks'];
   return redirect("/todo", code=302)
+
+
+if __name__ == "__main__":
+  app.run(debug=True)

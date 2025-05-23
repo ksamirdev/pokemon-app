@@ -81,7 +81,7 @@
         <div class="pokemon-wrapper">
           <div>
             <img
-              src="{{ data.image }}"
+              src="{{ data.sprites.front_default	 }}"
               class="pokemon-image"
               draggable="false"
               alt=""
@@ -90,10 +90,10 @@
 
           <div class="pokemon-details">
             <div class="flex flex-row justify-center" style="gap: 5px">
-              <span class="pokemon-type-badge">{{ data.primary_type }}</span>
+              <span class="pokemon-type-badge">{{ data.abilities[0].ability.name }}</span>
 
-              {% if data.secondary_type != None %}
-              <span class="pokemon-type-badge">{{ data.secondary_type }}</span>
+              {% if data.abilities|length > 0 %}
+              <span class="pokemon-type-badge">{{ data.abilities[1].ability.name }}</span>
               {% endif %}
             </div>
             <span class="pokemon-name madimi-one">#{{ data.id }} {{ data.name }}</span>
@@ -106,15 +106,15 @@
 
         <div>
           <div class="pokemon-meta-container">
-            <span>Attack: <b>{{ data.attack }}</b></span>
+            <span>Attack: <b>{{ data.stats[1].base_stat }}</b></span>
             <span class="pokemon-meta-divider">|</span>
-            <span>Defense: <b>{{ data.defence }}</b></span>
+            <span>Defense: <b>{{ data.stats[2].base_stat }}</b></span>
           </div>
 
           <div class="pokemon-meta-container">
-            <span>HP: <b>{{ data.hp }}</b></span>
+            <span>HP: <b>{{ data.stats[0].base_stat }}</b></span>
             <span class="pokemon-meta-divider">|</span>
-            <span>Speed: <b>{{ data.speed }}</b></span>
+            <span>Speed: <b>{{ data.stats[5].base_stat }}</b></span>
           </div>
 
           <div class="pokemon-meta-container">
@@ -124,9 +124,9 @@
           </div>
 
           <div class="pokemon-meta-container">
-            <span>Spe. Attack: <b>{{ data.special_attack }}</b></span>
+            <span>Spe. Attack: <b>{{ data.stats[3].base_stat }}</b></span>
             <span class="pokemon-meta-divider">|</span>
-            <span>Spe. Defense: <b>{{ data.special_defence }}</b></span>
+            <span>Spe. Defense: <b>{{ data.stats[4].base_stat }}</b></span>
           </div>
         </div>
       </div>
